@@ -14,7 +14,7 @@ CREATE TABLE users (
 
 CREATE TABLE wallets (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    summa DECIMAL(19,2) NOT NULL DEFAULT 0,
+    amount DECIMAL(19,2) NOT NULL DEFAULT 0,
     user_id INT NOT NULL,
     CONSTRAINT wallets_user_id UNIQUE (user_id),
     CONSTRAINT fk_wallets_users FOREIGN KEY (user_id) REFERENCES users(id)

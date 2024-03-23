@@ -3,6 +3,7 @@ package com.example.ecomerseshop.payment;
 import com.example.ecomerseshop.dao.FavourDataAccess;
 import com.example.ecomerseshop.dao.WalletDataAccess;
 import com.example.ecomerseshop.dto.*;
+import com.example.ecomerseshop.entity.PaymentEntity;
 import com.example.ecomerseshop.repository.PaymentRepository;
 import com.example.ecomerseshop.service.PaymentService;
 import org.junit.jupiter.api.BeforeEach;

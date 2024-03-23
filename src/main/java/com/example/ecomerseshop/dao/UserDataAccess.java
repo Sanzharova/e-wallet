@@ -1,4 +1,4 @@
-package com.example.ecomerseshop.service;
+package com.example.ecomerseshop.dao;
 
 import com.example.ecomerseshop.dto.Page;
 import com.example.ecomerseshop.dto.PageFilter;
@@ -6,7 +6,7 @@ import com.example.ecomerseshop.dto.User;
 
 import java.util.Optional;
 
-public interface UserService {
+public interface UserDataAccess {
     Page<User> getAllByFilter(PageFilter userFilter);
     Optional<User> getById(Integer userId);
     Integer save(User user);

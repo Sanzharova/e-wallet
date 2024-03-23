@@ -1,4 +1,4 @@
-package com.example.ecomerseshop.service.implementation;
+package com.example.ecomerseshop.dao.implementation;
 
 import com.example.ecomerseshop.dto.Page;
 import com.example.ecomerseshop.dto.PageFilter;
@@ -7,7 +7,7 @@ import com.example.ecomerseshop.entity.WalletEntity;
 import com.example.ecomerseshop.mapper.WalletMapper;
 import com.example.ecomerseshop.repository.UserRepository;
 import com.example.ecomerseshop.repository.WalletRepository;
-import com.example.ecomerseshop.service.WalletService;
+import com.example.ecomerseshop.dao.WalletDataAccess;
 import com.example.ecomerseshop.utils.LimitOffsetPageRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
@@ -22,7 +22,7 @@ import java.util.function.Predicate;
 
 @Service
 @RequiredArgsConstructor
-public class WalletServiceImpl implements WalletService {
+public class WalletDataAccessImpl implements WalletDataAccess {
 
     private final WalletRepository walletRepository;
     private final WalletMapper walletMapper;

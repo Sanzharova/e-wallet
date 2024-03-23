@@ -1,6 +1,7 @@
 package com.example.ecomerseshop.controller;
 
 import com.example.ecomerseshop.dto.*;
+import com.example.ecomerseshop.dao.PaymentDataAccess;
 import com.example.ecomerseshop.service.PaymentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 public class PaymentController implements PaymentApi {
 
     private final PaymentService paymentService;
+    private final PaymentDataAccess paymentDataAccess;
 
     public ResponseEntity<String> checkPayment(PaymentCheck paymentCheck) {
         String result = paymentService.checkPayment(paymentCheck);
@@ -35,7 +37,7 @@ public class PaymentController implements PaymentApi {
     }
 
     public ResponseEntity<String> getByStatusPayment(String status) {
-        String result = paymentService.getByStatusPayment(status);
+        String result = paymentDataAccess.getByStatusPayment(status);
         return ResponseEntity.ok(result);
     }
 }

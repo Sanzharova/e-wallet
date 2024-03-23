@@ -5,7 +5,7 @@ import com.example.ecomerseshop.dto.PageFilter;
 import com.example.ecomerseshop.entity.FavourEntity;
 import com.example.ecomerseshop.mapper.FavourMapper;
 import com.example.ecomerseshop.repository.FavourRepository;
-import com.example.ecomerseshop.service.implementation.FavourServiceImpl;
+import com.example.ecomerseshop.dao.implementation.FavourDataAccessImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -24,7 +24,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-public class FavourServiceTest {
+public class FavourDataAccessTest {
 
     @Mock
     private FavourRepository favourRepository;
@@ -33,7 +33,7 @@ public class FavourServiceTest {
     private FavourMapper favourMapper;
 
     @InjectMocks
-    private FavourServiceImpl favourService;
+    private FavourDataAccessImpl favourDataAccess;
 
     private FavourEntity mockFavourEntity;
     private Favour mockFavour;
@@ -65,7 +65,7 @@ public class FavourServiceTest {
         when(favourRepository.findAll(any(Specification.class), any(Pageable.class))).thenReturn(mockPage);
         when(favourMapper.toDto(any(FavourEntity.class))).thenReturn(mockFavour);
 
-        com.example.ecomerseshop.dto.Page<Favour> result = favourService.getAllByFilter(mockPageFilter);
+        com.example.ecomerseshop.dto.Page<Favour> result = favourDataAccess.getAllByFilter(mockPageFilter);
 
         assertEquals(1, result.getTotalElements());
     }
@@ -75,7 +75,7 @@ public class FavourServiceTest {
         when(favourRepository.findById(1)).thenReturn(Optional.of(mockFavourEntity));
         when(favourMapper.toDto(any(FavourEntity.class))).thenReturn(mockFavour);
 
-        Optional<Favour> result = favourService.getById(1);
+        Optional<Favour> result = favourDataAccess.getById(1);
 
         assertEquals(mockFavour, result.orElse(null));
     }
@@ -84,7 +84,7 @@ public class FavourServiceTest {
     void testSave() {
         when(favourRepository.save(any(FavourEntity.class))).thenReturn(mockFavourEntity);
 
-        Integer result = favourService.save(mockFavour);
+        Integer result = favourDataAccess.save(mockFavour);
 
         assertEquals(mockFavourEntity.getId().intValue(), result.intValue());
     }
@@ -94,7 +94,7 @@ public class FavourServiceTest {
         when(favourRepository.findById(anyInt())).thenReturn(Optional.of(mockFavourEntity));
         when(favourRepository.save(any(FavourEntity.class))).thenReturn(mockFavourEntity);
 
-        Integer result = favourService.update(mockFavour);
+        Integer result = favourDataAccess.update(mockFavour);
 
         assertEquals(mockFavourEntity.getId().intValue(), result.intValue());
     }
@@ -102,7 +102,7 @@ public class FavourServiceTest {
     @Test
     void testDelete() {
         Integer favourId = 1;
-        favourService.delete(favourId);
+        favourDataAccess.delete(favourId);
 
         verify(favourRepository, times(1)).deleteById(favourId);
     }

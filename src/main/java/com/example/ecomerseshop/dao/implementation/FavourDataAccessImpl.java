@@ -1,11 +1,11 @@
-package com.example.ecomerseshop.service.implementation;
+package com.example.ecomerseshop.dao.implementation;
 
 import com.example.ecomerseshop.dto.Favour;
 import com.example.ecomerseshop.dto.PageFilter;
 import com.example.ecomerseshop.entity.FavourEntity;
 import com.example.ecomerseshop.mapper.FavourMapper;
 import com.example.ecomerseshop.repository.FavourRepository;
-import com.example.ecomerseshop.service.FavourService;
+import com.example.ecomerseshop.dao.FavourDataAccess;
 import com.example.ecomerseshop.utils.LimitOffsetPageRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -21,7 +21,7 @@ import java.util.function.Predicate;
 
 @Service
 @RequiredArgsConstructor
-public class FavourServiceImpl implements FavourService {
+public class FavourDataAccessImpl implements FavourDataAccess {
 
     private final FavourRepository favourRepository;
     private final FavourMapper favourMapper;

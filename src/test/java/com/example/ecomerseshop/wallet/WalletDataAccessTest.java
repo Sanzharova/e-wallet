@@ -1,5 +1,6 @@
 package com.example.ecomerseshop.wallet;
 
+import com.example.ecomerseshop.dao.implementation.WalletDataAccessImpl;
 import com.example.ecomerseshop.dto.Page;
 import com.example.ecomerseshop.dto.PageFilter;
 import com.example.ecomerseshop.dto.Wallet;
@@ -8,7 +9,6 @@ import com.example.ecomerseshop.entity.WalletEntity;
 import com.example.ecomerseshop.mapper.WalletMapper;
 import com.example.ecomerseshop.repository.UserRepository;
 import com.example.ecomerseshop.repository.WalletRepository;
-import com.example.ecomerseshop.service.implementation.WalletServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -26,7 +26,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
-public class WalletServiceTest {
+public class WalletDataAccessTest {
 
     @Mock
     private WalletRepository walletRepository;
@@ -38,7 +38,7 @@ public class WalletServiceTest {
     private UserRepository userRepository;
 
     @InjectMocks
-    private WalletServiceImpl walletService;
+    private WalletDataAccessImpl walletDataAccess;
 
     @BeforeEach
     public void setUp() {
@@ -55,7 +55,7 @@ public class WalletServiceTest {
         when(walletRepository.findAll(any(Specification.class), any(Pageable.class))).thenReturn(mockPage);
 
         // Вызов метода для тестирования
-        Page<Wallet> result = walletService.getAllByFilter(pageFilter);
+        Page<Wallet> result = walletDataAccess.getAllByFilter(pageFilter);
 
         // Проверка результата
         assertEquals(1, result.getData().size());
@@ -70,7 +70,7 @@ public class WalletServiceTest {
         when(walletRepository.findById(1)).thenReturn(Optional.of(mockWalletEntity));
 
         // Вызов метода для тестирования
-        Optional<Wallet> result = walletService.getById(1);
+        Optional<Wallet> result = walletDataAccess.getById(1);
 
         // Проверка результата
         assertEquals(1, result.get().getId());
@@ -92,7 +92,7 @@ public class WalletServiceTest {
         when(walletRepository.save(any(WalletEntity.class))).thenReturn(mockWalletEntity);
 
         // Вызов метода для тестирования
-        Integer result = walletService.save(wallet);
+        Integer result = walletDataAccess.save(wallet);
 
         // Проверка результата
         assertEquals(1, result.intValue());
@@ -115,7 +115,7 @@ public class WalletServiceTest {
         when(walletRepository.save(any(WalletEntity.class))).thenReturn(mockWalletEntity);
 
         // Вызов метода для тестирования
-        Integer result = walletService.update(wallet);
+        Integer result = walletDataAccess.update(wallet);
 
         // Проверка результата
         assertEquals(1, result.intValue());
@@ -124,7 +124,7 @@ public class WalletServiceTest {
     @Test
     public void testDelete() {
         // Вызов метода для тестирования
-        Integer result = walletService.delete(1);
+        Integer result = walletDataAccess.delete(1);
 
         // Проверка результата
         assertEquals(1, result.intValue());

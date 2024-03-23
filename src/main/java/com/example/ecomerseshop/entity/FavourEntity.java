@@ -1,6 +1,7 @@
 package com.example.ecomerseshop.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Size;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -23,9 +24,11 @@ public class FavourEntity {
     Integer id;
 
     @Column(name = "title")
+    @Size(min = 10, max = 150)
     String title;
 
     @Column(name = "description")
+    @Size(min = 100, max = 500)
     String description;
 
     @Column(name = "created_at")

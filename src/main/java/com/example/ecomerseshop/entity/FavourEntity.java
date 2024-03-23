@@ -7,6 +7,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.FieldDefaults;
 
+import java.time.LocalDateTime;
+
 
 @Entity
 @Getter
@@ -25,4 +27,7 @@ public class FavourEntity {
 
     @Column(name = "description")
     String description;
+
+    @Column(name = "created_at")
+    LocalDateTime createdAt;
 }

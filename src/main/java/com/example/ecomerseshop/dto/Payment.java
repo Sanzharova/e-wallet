@@ -15,6 +15,6 @@ import java.math.BigDecimal;
 public class Payment {
     BigDecimal price;
     String accountCheck;
-    Favour favour;
-    Wallet walletId;
+    Integer favourId;
+    Integer walletId;
 }

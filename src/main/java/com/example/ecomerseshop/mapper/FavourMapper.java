@@ -8,4 +8,5 @@ import org.mapstruct.Mapper;
 @Mapper(componentModel = "spring", injectionStrategy = InjectionStrategy.CONSTRUCTOR)
 public interface FavourMapper {
     Favour toDto(FavourEntity favourEntity);
+    FavourEntity toEntity(Favour favour);
 }

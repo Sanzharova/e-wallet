@@ -9,7 +9,7 @@ public interface PaymentService {
 
     String createPayment(Payment paymentRequest, int id);
 
-    String confirmPayment(int id, RollbackPaymentWalletRequest walletRequest);
+    String confirmPayment(int id);
 
     String rollbackPayment(int id, RollbackPaymentWalletRequest walletRequest);
 

@@ -11,5 +11,5 @@ import lombok.experimental.FieldDefaults;
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class RollbackPaymentWalletRequest {
-    Wallet walletId;
+    Integer walletId;
 }

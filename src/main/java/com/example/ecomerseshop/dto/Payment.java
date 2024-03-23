@@ -14,7 +14,7 @@ import java.math.BigDecimal;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Payment {
     BigDecimal price;
-    String accountCheck;
+    String bankBookCheck;
     Integer favourId;
     Integer walletId;
 }

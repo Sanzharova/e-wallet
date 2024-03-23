@@ -37,7 +37,7 @@ public class PaymentEntity {
     BigDecimal sumOfFavour;
 
     @Column(name = "account_check")
-    String accountCheck;
+    String bankBookCheck;
 
     @Column(name = "is_checked")
     Boolean isChecked;

@@ -23,3 +23,17 @@ CREATE TABLE wallets (
     CONSTRAINT fk_wallets_users FOREIGN KEY (user_id) REFERENCES users(id)
 );
 
+CREATE TABLE payments(
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    status VARCHAR(255),
+    created_at timestamp NOT NULL DEFAULT current_timestamp,
+    updated_at timestamp,
+    amount DECIMAL(19,2) NOT NULL DEFAULT 0,
+    account_check VARCHAR(255),
+    is_checked BOOLEAN NOT NULL DEFAULT FALSE,
+    is_finished BOOLEAN NOT NULL DEFAULT FALSE,
+    favour_id INT,
+    wallet_id INT,
+    CONSTRAINT fk_payments_favours FOREIGN KEY (favour_id) REFERENCES favours(id),
+    CONSTRAINT fk_payments_users FOREIGN KEY (wallet_id) REFERENCES wallets(id)
+)

@@ -6,10 +6,12 @@ import com.example.ecomerseshop.dto.*;
 import com.example.ecomerseshop.entity.PaymentEntity;
 import com.example.ecomerseshop.entity.PaymentStatus;
 import com.example.ecomerseshop.mapper.FavourMapper;
+import com.example.ecomerseshop.mapper.WalletMapper;
 import com.example.ecomerseshop.repository.PaymentRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.time.Instant;
 import java.util.Date;
@@ -22,12 +24,17 @@ public class PaymentService {
     private final FavourDataAccess favourDataAccess;
     private final WalletDataAccess walletDataAccess;
     private final FavourMapper favourMapper;
+    private final WalletMapper walletMapper;
 
 
     public String checkPayment(PaymentCheck paymentCheckRequest) {
 
-        if(paymentCheckRequest.getAmountOfFavour() > 500 && paymentCheckRequest.getAmountOfFavour() < 25000 &&
-                paymentCheckRequest.getBankBookCheck() != null) {
+        var minValue = new BigDecimal(500);
+        var maxValue = new BigDecimal(25000);
+
+        if(paymentCheckRequest.getAmountOfFavour().compareTo(minValue) < 0
+                && paymentCheckRequest.getAmountOfFavour().compareTo(maxValue) < 0
+                && paymentCheckRequest.getBankBookCheck() != null) {
 
             PaymentEntity payment = new PaymentEntity();
 
@@ -67,6 +74,7 @@ public class PaymentService {
             payment.setFavour(favourMapper.toEntity(favour));
             payment.setSumOfFavour(paymentRequest.getPrice());
             payment.setBankBookCheck(paymentRequest.getBankBookCheck());
+            payment.setWallet(walletMapper.toEntity(wallet));
             payment.getWallet().setAmount(wallet.getAmount().subtract(payment.getSumOfFavour()));
 
             paymentRepository.save(payment);

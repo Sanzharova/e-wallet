@@ -1,7 +1,4 @@
-# ecommerce-shop
-E-wallet
- 
-# ecommerce-shop
+# E-wallet
 
 ```bash
 Add configuration in src/main/resources/application.properties

@@ -7,6 +7,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.FieldDefaults;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Getter
 @Setter
@@ -30,4 +32,7 @@ public class UserEntity {
 
     @Column(name = "middle_name")
     String middleName;
+
+    @Column(name = "created_at")
+    LocalDateTime createdAt;
 }

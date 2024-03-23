@@ -15,4 +15,5 @@ import java.math.BigDecimal;
 public class Wallet {
     Integer id;
     BigDecimal amount;
+    Integer userId;
 }

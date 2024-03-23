@@ -1,7 +1,7 @@
 package com.example.ecomerseshop.service.implementation;
 
 import com.example.ecomerseshop.dto.Favour;
-import com.example.ecomerseshop.dto.FavourFilter;
+import com.example.ecomerseshop.dto.PageFilter;
 import com.example.ecomerseshop.entity.FavourEntity;
 import com.example.ecomerseshop.mapper.FavourMapper;
 import com.example.ecomerseshop.repository.FavourRepository;
@@ -25,7 +25,7 @@ public class FavourServiceImpl implements FavourService {
     private final FavourMapper favourMapper;
 
     @Override
-    public com.example.ecomerseshop.dto.Page<Favour> getAllByFilter(FavourFilter favourFilter) {
+    public com.example.ecomerseshop.dto.Page<Favour> getAllByFilter(PageFilter favourFilter) {
         Specification<FavourEntity> specification = ((root, query, criteriaBuilder) -> {
             List<Predicate> predicates = new ArrayList<>();
 

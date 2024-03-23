@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class FavourFilter {
+public class PageFilter {
     private LocalDateTime createdAtStart;
     private LocalDateTime createdAtEnd;
     private Integer limit;

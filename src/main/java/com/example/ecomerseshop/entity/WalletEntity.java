@@ -8,6 +8,7 @@ import lombok.Setter;
 import lombok.experimental.FieldDefaults;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -27,4 +28,7 @@ public class WalletEntity {
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     UserEntity user;
+
+    @Column(name = "created_at")
+    LocalDateTime createdAt;
 }

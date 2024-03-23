@@ -15,6 +15,7 @@ import org.springframework.data.jpa.domain.Specification;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Predicate;
 
 @RequiredArgsConstructor
@@ -58,22 +59,33 @@ public class FavourServiceImpl implements FavourService {
     }
 
     @Override
-    public Favour getById(Integer favourId) {
-        return null;
+    public Optional<Favour> getById(Integer favourId) {
+        return favourRepository
+                .findById(favourId)
+                .map(favourMapper::toDto);
     }
 
     @Override
     public Integer save(Favour favour) {
-        return null;
+        FavourEntity favourEntity = new FavourEntity();
+        favourEntity.setTitle(favour.getTitle());
+        favourEntity.setDescription(favour.getDescription());
+        return favourRepository.save(favourEntity).getId();
     }
 
     @Override
     public Integer update(Favour favour) {
-        return null;
+        FavourEntity favourEntity = favourRepository
+                .findById(favour.getId())
+                .orElseThrow(() -> new RuntimeException("Не был найдена услуга с таким идентификатором!"));
+        favourEntity.setTitle(favour.getTitle());
+        favourEntity.setDescription(favour.getDescription());
+        return favourRepository.save(favourEntity).getId();
     }
 
     @Override
     public Integer delete(Integer favourId) {
-        return null;
+        favourRepository.deleteById(favourId);
+        return favourId;
     }
 }

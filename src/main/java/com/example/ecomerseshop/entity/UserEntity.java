@@ -33,6 +33,21 @@ public class UserEntity {
     @Column(name = "middle_name")
     String middleName;
 
+    @Column(name = "credentials_expiry_date")
+    LocalDateTime credentialsExpiryDate;
+
+    @Column(name = "is_account_non_expired")
+    Boolean isAccountExpired;
+
+    @Column(name = "is_account_non_locked")
+    Boolean isAccountLocked;
+
+    @Column(name = "is_active", nullable = false)
+    Boolean isActive;
+
+    @Column(name = "is_enabled")
+    Boolean isEnabled;
+
     @Column(name = "created_at")
     LocalDateTime createdAt;
 }

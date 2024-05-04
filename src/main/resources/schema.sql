@@ -50,7 +50,7 @@ CREATE TABLE refresh_token (
     refresh_count INT,
     expire_date TIMESTAMP WITHOUT TIME ZONE NOT NULL,
     created_at TIMESTAMP WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP,
     FOREIGN KEY fk_refresh_token_user_devicea (user_device_id) REFERENCES auth.user_device(id)
 );
 
@@ -61,7 +61,7 @@ CREATE TABLE user_device (
      device_id VARCHAR(255),
      is_refresh_active BOOLEAN,
      created_at TIMESTAMP WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-     updated_at TIMESTAMP WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+     updated_at TIMESTAMP,
      FOREIGN KEY fk_user_device_users (user_id) REFERENCES users(id)
 );
 

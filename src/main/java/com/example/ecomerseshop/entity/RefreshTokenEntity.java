@@ -16,7 +16,7 @@ import java.time.Instant;
 @Setter
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@Table(schema = "auth",name = "refresh_token")
+@Table(name = "refresh_token")
 public class RefreshTokenEntity extends DateAudit {
 
 

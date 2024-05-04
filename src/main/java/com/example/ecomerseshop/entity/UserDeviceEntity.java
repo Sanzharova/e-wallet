@@ -14,7 +14,7 @@ import lombok.experimental.FieldDefaults;
 @Setter
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@Table(schema = "auth", name = "user_device")
+@Table(name = "user_device")
 public class UserDeviceEntity extends DateAudit {
 
 

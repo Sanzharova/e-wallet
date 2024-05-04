@@ -43,25 +43,25 @@ CREATE TABLE payments(
     CONSTRAINT fk_payments_users FOREIGN KEY (wallet_id) REFERENCES wallets(id)
 );
 
-CREATE TABLE refresh_token (
-    id SERIAL PRIMARY KEY,
-    token VARCHAR(255) NOT NULL UNIQUE,
-    user_device_id INTEGER UNIQUE,
-    refresh_count INT,
-    expire_date TIMESTAMP WITHOUT TIME ZONE NOT NULL,
-    created_at TIMESTAMP WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP,
-    FOREIGN KEY fk_refresh_token_user_devicea (user_device_id) REFERENCES auth.user_device(id)
-);
-
 CREATE TABLE user_device (
-     id SERIAL PRIMARY KEY,
-     user_id INTEGER,
-     device_type VARCHAR(255),
-     device_id VARCHAR(255),
-     is_refresh_active BOOLEAN,
-     created_at TIMESTAMP WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-     updated_at TIMESTAMP,
-     FOREIGN KEY fk_user_device_users (user_id) REFERENCES users(id)
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT,
+    device_type VARCHAR(255),
+    device_id VARCHAR(255),
+    is_refresh_active BOOLEAN,
+    created_at timestamp NOT NULL DEFAULT current_timestamp,
+    updated_at timestamp,
+    CONSTRAINT fk_user_device_users FOREIGN KEY (user_id) REFERENCES users(id)
 );
 
+
+CREATE TABLE refresh_token (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    token VARCHAR(255) NOT NULL UNIQUE,
+    user_device_id INT UNIQUE,
+    refresh_count INT,
+    expire_date timestamp,
+    created_at timestamp NOT NULL DEFAULT current_timestamp,
+    updated_at timestamp,
+    CONSTRAINT fk_refresh_token_user_device FOREIGN KEY (user_device_id) REFERENCES user_device(id)
+);

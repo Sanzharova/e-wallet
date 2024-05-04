@@ -47,7 +47,6 @@ public class FavourDataAccessTest {
         mockFavourEntity.setDescription("Mock Favour Description");
 
         mockFavour = new Favour();
-        mockFavour.setId(2);
         mockFavour.setTitle("Mock Favour");
         mockFavour.setDescription("Mock Favour Description");
 
@@ -94,7 +93,7 @@ public class FavourDataAccessTest {
         when(favourRepository.findById(anyInt())).thenReturn(Optional.of(mockFavourEntity));
         when(favourRepository.save(any(FavourEntity.class))).thenReturn(mockFavourEntity);
 
-        Integer result = favourDataAccess.update(mockFavour);
+        Integer result = favourDataAccess.update(mockFavour, 1);
 
         assertEquals(mockFavourEntity.getId().intValue(), result.intValue());
     }

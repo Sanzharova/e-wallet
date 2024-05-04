@@ -29,11 +29,7 @@ public class UserController implements UserApi {
     }
 
     public ResponseEntity<Void> updateUser(Integer userId, User user) {
-        if (!userId.equals(user.getId())) {
-            return ResponseEntity.badRequest().build();
-        }
-        user.setId(userId);
-        Integer updatedUserId = userDataAccess.update(user);
+        Integer updatedUserId = userDataAccess.update(user, userId);
         if (updatedUserId != null) {
             return ResponseEntity.ok().build();
         } else {

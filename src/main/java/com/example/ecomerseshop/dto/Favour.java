@@ -11,7 +11,6 @@ import lombok.experimental.FieldDefaults;
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Favour {
-    Integer id;
     String title;
     String description;
 }

@@ -10,6 +10,8 @@ public interface UserDataAccess {
     Page<User> getAllByFilter(PageFilter userFilter);
     Optional<User> getById(Integer userId);
     Integer save(User user);
-    Integer update(User user);
+
+    Integer update(User user, Integer userId);
+
     Integer delete(Integer userId);
 }

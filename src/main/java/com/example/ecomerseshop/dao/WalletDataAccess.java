@@ -10,6 +10,7 @@ public interface WalletDataAccess {
     Page<Wallet> getAllByFilter(PageFilter walletFilter);
     Optional<Wallet> getById(Integer walletId);
     Integer save(Wallet wallet);
-    Integer update(Wallet wallet);
+    Integer update(Wallet wallet, Integer walletId);
+
     Integer delete(Integer walletId);
 }

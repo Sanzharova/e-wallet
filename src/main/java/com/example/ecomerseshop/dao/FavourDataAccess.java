@@ -10,6 +10,8 @@ public interface FavourDataAccess {
     Page<Favour> getAllByFilter(PageFilter favourFilter);
     Optional<Favour> getById(Integer favourId);
     Integer save(Favour favour);
-    Integer update(Favour favour);
+
+    Integer update(Favour favour, Integer favourId);
+
     Integer delete(Integer favourId);
 }

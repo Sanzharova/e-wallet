@@ -76,9 +76,9 @@ public class FavourDataAccessImpl implements FavourDataAccess {
     }
 
     @Override
-    public Integer update(Favour favour) {
+    public Integer update(Favour favour, Integer favourId) {
         FavourEntity favourEntity = favourRepository
-                .findById(favour.getId())
+                .findById(favourId)
                 .orElseThrow(() -> new RuntimeException("Не был найдена услуга с таким идентификатором!"));
         favourEntity.setTitle(favour.getTitle());
         favourEntity.setDescription(favour.getDescription());

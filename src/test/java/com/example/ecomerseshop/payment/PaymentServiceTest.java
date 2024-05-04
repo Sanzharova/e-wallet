@@ -73,10 +73,8 @@ public class PaymentServiceTest {
         paymentEntity.setIsChecked(true);
 
         Favour favour = new Favour();
-        favour.setId(1);
 
         Wallet wallet = new Wallet();
-        wallet.setId(1);
         wallet.setAmount(new BigDecimal(200));
 
         when(paymentRepository.findById(anyInt())).thenReturn(Optional.of(paymentEntity));

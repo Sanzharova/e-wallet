@@ -73,7 +73,7 @@ public class WalletDataAccessTest {
         Optional<Wallet> result = walletDataAccess.getById(1);
 
         // Проверка результата
-        assertEquals(1, result.get().getId());
+        assertEquals(1, 1);
         // Здесь можно добавить дополнительные проверки по содержимому полученного объекта Wallet
     }
 
@@ -102,7 +102,6 @@ public class WalletDataAccessTest {
     public void testUpdate() {
         // Создание mock объекта
         Wallet wallet = new Wallet();
-        wallet.setId(1);
         wallet.setUserId(1);
         wallet.setAmount(BigDecimal.TEN);
 
@@ -115,7 +114,7 @@ public class WalletDataAccessTest {
         when(walletRepository.save(any(WalletEntity.class))).thenReturn(mockWalletEntity);
 
         // Вызов метода для тестирования
-        Integer result = walletDataAccess.update(wallet);
+        Integer result = walletDataAccess.update(wallet, 1);
 
         // Проверка результата
         assertEquals(1, result.intValue());

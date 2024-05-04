@@ -29,8 +29,7 @@ public class WalletController implements WalletApi{
     }
 
     public ResponseEntity<Integer> updateWallet(Integer walletId, Wallet wallet) {
-        wallet.setId(walletId);
-        Integer updatedId = walletDataAccess.update(wallet);
+        Integer updatedId = walletDataAccess.update(wallet, walletId);
         if (!walletId.equals(updatedId)) {
             return ResponseEntity.status(HttpStatus.CONFLICT).build();
         }

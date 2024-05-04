@@ -79,9 +79,9 @@ public class UserDataAccessImpl implements UserDataAccess {
     }
 
     @Override
-    public Integer update(User user) {
+    public Integer update(User user, Integer userId) {
         var userEntity = userRepository
-                .findById(user.getId())
+                .findById(userId)
                 .orElseThrow(() -> new RuntimeException("Не был найден пользователь с таким идентификатором!"));
 
         userEntity.setFirstName(user.getFirstName());

@@ -21,5 +21,5 @@ public interface UserApi {
     ResponseEntity<Integer> deleteUser(@PathVariable Integer userId);
 
     @GetMapping("/filtered")
-    ResponseEntity<Page<User>> getUsersByFilter(@RequestBody PageFilter pageFilter);
+    ResponseEntity<Page<User>> getUsersByFilter(@ModelAttribute PageFilter pageFilter);
 }

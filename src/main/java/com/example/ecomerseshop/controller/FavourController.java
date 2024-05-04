@@ -34,8 +34,7 @@ public class FavourController implements FavourApi{
     }
 
     public ResponseEntity<Void> updateFavour(Integer id, Favour favour) {
-        favour.setId(id);
-        Integer updatedId = favourDataAccess.update(favour);
+        Integer updatedId = favourDataAccess.update(favour, id);
         if (!id.equals(updatedId)) {
             return ResponseEntity.status(HttpStatus.CONFLICT).build();
         }

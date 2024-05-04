@@ -13,7 +13,6 @@ import java.math.BigDecimal;
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Wallet {
-    Integer id;
     BigDecimal amount;
     Integer userId;
 }

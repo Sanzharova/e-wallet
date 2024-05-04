@@ -84,9 +84,9 @@ public class WalletDataAccessImpl implements WalletDataAccess {
     }
 
     @Override
-    public Integer update(Wallet wallet) {
+    public Integer update(Wallet wallet, Integer walletId) {
         WalletEntity walletEntity = walletRepository
-                                .findById(wallet.getId())
+                                .findById(walletId)
                                 .orElseThrow(() -> new RuntimeException("Не был найден кошелек с таким идентификатором!"));
 
         var user = userRepository

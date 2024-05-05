@@ -11,6 +11,8 @@ CREATE TABLE users (
     first_name VARCHAR(255),
     last_name VARCHAR(255),
     middle_name VARCHAR(255),
+    password VARCHAR(255),
+    role_user VARCHAR(255),
     credentials_expiry_date timestamp,
     is_account_non_expired BOOLEAN,
     is_account_non_locked BOOLEAN,

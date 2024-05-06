@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.FieldDefaults;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -26,8 +27,8 @@ public class UserEntity implements UserDetails {
     @Column(name = "id")
     Integer id;
 
-    @Column(name = "phone_number")
-    String phoneNumber;
+    @Column(name = "username")
+    String username;
 
     @Column(name = "password")
     String password;
@@ -63,6 +64,19 @@ public class UserEntity implements UserDetails {
     @Column(name = "created_at")
     LocalDateTime createdAt;
 
+    @Column(name = "photo_url")
+    private String photoUrl;
+
+
+    public UserEntity(String firstName, String lastName, String username, String photoUrl) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.username = username;
+        this.photoUrl = photoUrl;
+        this.isEnabled = true;
+    }
+
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
 
@@ -77,7 +91,7 @@ public class UserEntity implements UserDetails {
 
     @Override
     public String getUsername() {
-        return phoneNumber;
+        return username;
     }
 
     @Override

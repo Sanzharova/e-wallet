@@ -24,7 +24,7 @@ public class ApplicationConfig {
 
     @Bean
     public UserDetailsService userDetailsService() {
-        return userRepository::findByPhoneNumber;
+        return userRepository::findByUsername;
     }
 
     @Bean

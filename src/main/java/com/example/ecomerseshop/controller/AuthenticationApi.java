@@ -22,4 +22,7 @@ public interface AuthenticationApi {
     @PostMapping("/changePassword/{id}")
     ResponseEntity<String> changePassword(@RequestBody PasswordRequest passwordRequest,
                                           @PathVariable Integer id);
+
+    @PostMapping("/authenticate/google")
+    ResponseEntity<String> createGoogleUser();
 }

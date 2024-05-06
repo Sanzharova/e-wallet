@@ -9,6 +9,7 @@ import com.example.ecomerseshop.exception.UserLoginException;
 import com.example.ecomerseshop.repository.RefreshTokenRepository;
 import com.example.ecomerseshop.repository.UserRepository;
 import com.example.ecomerseshop.utils.JwtUtils;
+import com.example.ecomerseshop.utils.ValidateGoogleAuthToken;
 import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Timestamp;
 import java.time.Instant;
@@ -41,6 +43,8 @@ public class AuthenticationService {
 
     private final RefreshTokenRepository refreshTokenRepository;
 
+    private final ValidateGoogleAuthToken validateGoogleAuthToken;
+
 
     @Autowired
     public AuthenticationService(UserRepository userRepository,
@@ -49,7 +53,8 @@ public class AuthenticationService {
                                  AuthenticationManager authenticationManager,
                                  RefreshTokenService refreshTokenService,
                                  UserDeviceService userDeviceService,
-                                 RefreshTokenRepository refreshTokenRepository) {
+                                 RefreshTokenRepository refreshTokenRepository,
+                                 ValidateGoogleAuthToken validateGoogleAuthToken) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.jwtUtils = jwtUtils;
@@ -57,6 +62,7 @@ public class AuthenticationService {
         this.refreshTokenService = refreshTokenService;
         this.userDeviceService = userDeviceService;
         this.refreshTokenRepository = refreshTokenRepository;
+        this.validateGoogleAuthToken = validateGoogleAuthToken;
     }
 
     public AuthenticationResponse registrationUser(RegistrationRequest registerRequest) {
@@ -64,7 +70,7 @@ public class AuthenticationService {
         UserEntity user = new UserEntity();
 
 
-        user.setPhoneNumber(registerRequest.getPhoneNumber());
+        user.setUsername(registerRequest.getPhoneNumber());
         user.setPassword(passwordEncoder.encode(registerRequest.getPassword()));
         user.setUserRole(UserRole.USER);
         user.setCreatedAt(Timestamp.from(Instant.now()).toLocalDateTime());
@@ -145,5 +151,40 @@ public class AuthenticationService {
         userRepository.save(user);
 
         return "Change Password";
+    }
+
+    @Transactional
+    public String handleGoogleSignIn(String jwtToken) {
+        try {
+            UserEntity user = validateGoogleAuthToken.verifyGoogleAuthToken(jwtToken)
+                    .orElseThrow(() -> new RuntimeException("Failed to validate JWT."));
+
+            UserEntity isAlreadyUser = userRepository.findByUsername(user.getUsername());
+
+            if (isAlreadyUser != null) {
+                if (!isAlreadyUser.isEnabled()) {
+                    isAlreadyUser.setUserRole(UserRole.USER);
+                    isAlreadyUser.setCreatedAt(Timestamp.from(Instant.now()).toLocalDateTime());
+                    isAlreadyUser.setIsAccountExpired(Boolean.TRUE);
+                    isAlreadyUser.setIsActive(Boolean.TRUE);
+                    isAlreadyUser.setIsAccountLocked(Boolean.TRUE);
+                    isAlreadyUser.setIsEnabled(Boolean.TRUE);
+                }
+                userRepository.save(isAlreadyUser);
+            } else {
+                log.info("Creating new Google user.");
+                user.setUserRole(UserRole.USER);
+                user.setCreatedAt(Timestamp.from(Instant.now()).toLocalDateTime());
+                user.setIsAccountExpired(Boolean.TRUE);
+                user.setIsActive(Boolean.TRUE);
+                user.setIsAccountLocked(Boolean.TRUE);
+                user.setIsEnabled(Boolean.TRUE);
+                userRepository.save(user);
+            }
+        } catch (Exception e) {
+            throw new UserLoginException("Exception in handleGoogleSignIn: {}", e);
+        }
+
+        return "Created from google auth!";
     }
 }

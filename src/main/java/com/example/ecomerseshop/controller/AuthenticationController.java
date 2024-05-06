@@ -8,6 +8,8 @@ import com.example.ecomerseshop.dto.RegistrationRequest;
 import com.example.ecomerseshop.service.AuthenticationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.web.bind.annotation.RestController;
 
 
@@ -35,5 +37,13 @@ public class AuthenticationController implements AuthenticationApi {
     public ResponseEntity<String> changePassword(PasswordRequest passwordRequest, Integer id) {
 
         return ResponseEntity.status(201).body(authenticationService.changePassword(passwordRequest, id));
+    }
+
+    public ResponseEntity<String> createGoogleUser() {
+        JwtAuthenticationToken jwtAuthenticationToken = (JwtAuthenticationToken)
+                SecurityContextHolder.getContext().getAuthentication();
+        String bearerToken = jwtAuthenticationToken.getToken().getTokenValue();
+
+        return ResponseEntity.ok(authenticationService.handleGoogleSignIn(bearerToken));
     }
 }
